@@ -21,6 +21,3 @@ const databases = [
     }
 ];
 
-const EasySQLTypes = ["SELECT", "DELETE", "UPDATE"];
-const MediumSQLTypes = ["SELECT", "DELETE", "INSERT", "UPDATE", "CREATE", "ALTER", "DROP"];
-const HardSQLTypes = ["SELECT", "DELETE", "INSERT", "UPDATE", "CREATE", "ALTER", "DROP"];

@@ -1,45 +1,62 @@
-const Storage_Key = "sqldle_used_prompts";
+let deck = [];
+let deckIndex = 0;
 
-// need to swtitch to a server when going to upload figure out later
+const sqlTypes = {
+    easy: ["SELECT", "DELETE", "UPDATE"],
+    medium: ["SELECT", "DELETE", "INSERT", "UPDATE", "CREATE", "ALTER", "DROP"],
+    hard: ["SELECT", "DELETE", "INSERT", "UPDATE", "CREATE", "ALTER", "DROP"]
+};
 
-function loadUsedPrompts() 
-{
-    const raw = localStorage.getItem(Storage_Key);
-    return raw ? JSON.parse(raw) : [];
-}
-
-function saveUsedPrompt(promptText)
-{
-    const used = loadUsedPrompts();
-    if(!used.includes(promptText))
-    {
-        used.push(promptText);
-        localStorage.setItem(Storage_Key, JSON.stringify(used));
+function buildDeck(difficulty = "easy") {
+    const types = sqlTypes[difficulty];
+    deck = [];
+    for (const db of databases) {
+        for (const table of db.tables) {
+            for (const column of table.columns) {
+                for (const sqlType of types) {
+                    deck.push({ db, table, column, sqlType });
+                }
+            }
+        }
     }
-
+    shuffleDeck(getDailySeed());
 }
 
-function clearUsedPrompts()
+function shuffleDeck(seed = null) 
 {
-    localStorage.removeItem(Storage_Key);
+    const rng = seed !== null ? seededRNG(seed) : Math.random.bind(Math);
+    for (let i = deck.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [deck[i], deck[j]] = [deck[j], deck[i]];
+    }
+    deckIndex = 0;
 }
 
-// Check if a prompt has already been used
-function isPromptUsed(promptText)
+function dealPrompt()
 {
-    return loadUsedPrompts().includes(promptText);
+    if (deckIndex >= deck.length) 
+        {
+            shuffleDeck(getDailySeed());
+        }
+        return deck[deckIndex++];
 }
 
-//returns true if all prompts have been used should never happen
-
-
-function allPromptsUsed()
+function seededRNG(seed) 
 {
-    const used = loadUsedPrompts();
-    return allPrompts.every(prompt => used.includes(prompt));
+    return function() 
+    {
+        seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+        let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+        t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
 }
 
-function markPromptAsUsed(promptText)
+function getDailySeed()
 {
-    saveUsedPrompt(promptText);
+    const now = new Date();
+
+    return now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate();
 }
+
+buildDeck();

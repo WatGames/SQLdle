@@ -1,68 +1,31 @@
 let currentChallenge = null;
 let attemptsLeft = 5;
 
-function countAllEasyPromts() 
-{
-    let total = 0;
-   
-        for (const db of databases) 
-            {
-            for (const table of db.tables) 
-            {
-                total+= table.columns.length;
-            }
-
-        }
-
-       return total * EasySQLTypes.length;
-}
 
 function createPrompt() 
 {
-    const usedPrompts = loadUsedPrompts();  
-    if(usedPrompts.length >= countAllEasyPromts())
+    const { db : selectedDB, table : selectedTable, column : selectedColumn, sqlType } = dealPrompt();  
+    let result;
+    if (sqlType === "SELECT")
     {
-        clearUsedPrompts();
+        result = SelectPrompt(selectedColumn, selectedTable);
     }
-    
-    let selectedDB, selectedTable, selectedColumn, result;
-    let sqlType = "";
-    
-    
+    else if (sqlType === "DELETE")
+    {
+        result = DeletePrompt(selectedColumn, selectedTable);
+    }
+    else if (sqlType === "UPDATE")
+    {
+        result = UpdatePrompt(selectedColumn, selectedTable);
+    }
+
+    if (!result)
+    {
+        console.error("No result generated for SQL type:", sqlType);
+        return null;
+    }
 
     
-    let attempts = 0;
-    do {
-        sqlType = EasySQLTypes[Math.floor(Math.random() * EasySQLTypes.length)];
-        selectedDB = databases[Math.floor(Math.random() * databases.length)];
-        selectedTable = selectedDB.tables[Math.floor(Math.random() * selectedDB.tables.length)];
-        selectedColumn = selectedTable.columns[Math.floor(Math.random() * selectedTable.columns.length)];
-        if(sqlType === "SELECT")
-        {
-            result = SelectPrompt(selectedColumn, selectedTable);
-        }
-        else if(sqlType === "DELETE")
-        {
-            result = DeletePrompt(selectedColumn, selectedTable);
-        }
-        else if(sqlType === "UPDATE")
-        {
-            result = UpdatePrompt(selectedColumn, selectedTable);
-        }
-        attempts++;
-        if (attempts > 100) // Failsafe to prevent infinite loops in case of a bug
-        {
-            console.warn("Too many attempts to generate a unique prompt. Clearing used prompts.");
-            clearUsedPrompts();
-            break;
-        }
-
-    } while (isPromptUsed(result.answer));
-
-    
-
-
-    saveUsedPrompt(result.answer);
     return {
         chosenDB: displayDB(selectedDB, selectedTable),
         prompt: result.prompt,
@@ -80,8 +43,17 @@ function SelectPrompt(column, table)
             if (column.type === "INT")
             {
                 const randomValue = Math.floor(Math.random() * 1000); 
-                prompt = `Write a query that returns the ${column.name} column from the ${table.name} table where the value is greater than ${randomValue}.`;
+                const GT = Math.random() < 0.5;
+                if(GT)
+                {
+                    prompt = `Write a query that returns the ${column.name} column from the ${table.name} table where the value is greater than ${randomValue}.`;
                 answer = `SELECT ${column.name} FROM ${table.name} WHERE ${column.name} > ${randomValue};`;
+                }
+                else                
+                    {
+                    prompt = `Write a query that returns the ${column.name} column from the ${table.name} table where the value is less than ${randomValue}.`;
+                    answer = `SELECT ${column.name} FROM ${table.name} WHERE ${column.name} < ${randomValue};`;
+                }                
             }
             else if (column.type.startsWith("VARCHAR"))
             {
@@ -124,6 +96,11 @@ function displayDB(selectedDB, table) {
 
 function newPrompt() {
     currentChallenge = createPrompt(); 
+    if (!currentChallenge) 
+        {
+        document.getElementById("prompt-text").textContent = "Error loading prompt — check console.";
+        return;
+    }
     attemptsLeft = 5;
     document.getElementById("database").innerHTML = `Current Database: <br>${currentChallenge.chosenDB}`;
     document.getElementById("prompt-text").textContent = currentChallenge.prompt;
