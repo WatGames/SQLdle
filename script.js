@@ -16,3 +16,4 @@ function Play()
     window.location.href = selectedDiff + ".html";
 }
 
+

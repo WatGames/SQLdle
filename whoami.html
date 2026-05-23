@@ -14,7 +14,7 @@
     <p>This project is a SQL based wordle clone, where you have to guess the correct SQL query in 5 tries or less. You can select from 3 difficulties, easy, medium and hard.<br> Each difficulty has an increasing level of difficulty relating to the complexity of the request and the difficulty of the queries.</p>
     <p>Once you have selected a difficulty, you can press the "Play" button to start the game.</p>
     <p>To go back to the main page, click the "Back" button below.</p>
-    <button onclick="window.location.href='index.html'">Back</button>
+    <button id="backButton" onclick="window.location.href='index.html'">Back</button>
     <h2>Dev log 1 (10/4/2026):</h2>
     <ul>
         <li>Started the project on May 10th, 2026.</li>
@@ -76,6 +76,7 @@
         <li>Added a feature to shuffle the prompts to ensure a random order of prompts.</li>
         <li>Added a new function to generate a daily seed for shuffling prompts. So that the same prompts are generated each day.</li>
         <li>Added a feature that allows for practice mode to be enabled/disabled. When enabled, users can get new prompts. When disabled, users cannot get new prompts and can only view the current day's prompt.</li>
+        <li>When practice mode is disabled, the "New Prompt" button is disabled, when enabled, it is enabled.</li>
     </ul>
         
 </body>

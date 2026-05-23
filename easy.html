@@ -11,9 +11,13 @@
     <script src="easy.js" defer></script>    
 </head>
 <body>
-    <button onclick="window.location.href='index.html'">Back</button>
-    <h1>SQLdle - Easy</h1>
     
+    <h1>SQLdle - Easy</h1>
+    <div class="back">
+    <p>Welcome to the easy difficulty level of SQLdle. In this difficulty level, you will be given prompts that require basic SQL queries to solve. You will have 5 attempts to guess the correct SQL query for each prompt. Good luck!</p>
+    <button id="backButton" onclick="window.location.href='index.html'">Back</button>
+   
+    <span>Practice Mode</span></div>
     <div id = "prompt-box">
         <p id="database">Loading database...</p>
         <p id="prompt-text">Loading prompt...</p>
@@ -21,12 +25,17 @@
     <div id="count">Attempts left: 5</div>
     <textarea id="query-input" rows="4" cols="50" placeholder="Enter your SQL query here..."></textarea>
     <br>
-    <button onclick="checkAnswer()">Submit</button>
 
-    <button onclick="onNewPromptClicked()">New Prompt</button>
-    <p id="feedback"></p>
+    <button id="submitButton" onclick="checkAnswer()">Submit</button>
 
-    <input type="checkbox" id="PracticeMode" value="PracticeMode">
-    <label for="PracticeMode">Practice Mode</label>
+    <div id="practice-row">
+        <label class="switch">
+            <input type="checkbox" id="PracticeMode">
+            <span class="slider"></span>
+        </label>
+        <span id="practice-label">Practice Mode</span>
+        <button id="NewPromptButton" onclick="onNewPromptClicked()">New Prompt</button>
+    </div>
+    <p id="feedback"></p>    
 </body>
 </html>

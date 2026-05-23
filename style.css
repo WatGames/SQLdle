@@ -1,0 +1,202 @@
+*{ box-sizing: border-box; margin: 0; padding: 0;  }
+
+body {
+    font-family: 'Trebuchet MS', sans-serif;
+    background: #fef9f0;
+    color: #1c1917;
+    padding: 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+h1 { font-size: 2.5rem; font-weight: 900; letter-spacing: -1px; margin-bottom: 0.25rem; border-bottom: 4px solid #35b7eb; display: inline-block; }
+h2 { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin: 1.5rem 0 0.75rem;  }
+p { color: #78716c; font-size: 0.885rem; line-height: 1.7; margin-bottom: 1rem; }
+a{color: #d97706;}
+
+
+.difficulty-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 13px;    
+}
+.difficulty{
+    flex: 1;
+    padding: 10px;
+    background: white;
+    border: 2px solid #e7e5e4;
+    color: #57534e;
+    font-weight: 600;
+    font-size: 0.875rem;
+    cursor: pointer;
+}
+.difficulty:hover, .difficulty.selected {
+    border-color: #f59e0b;
+    color: #92400e;
+    background: #fffbeb;
+}
+
+#playBtn {
+    width: 100%;
+    padding: 13px;
+    background: #1c1917;
+    color: #fef9f0;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 1px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+#playBtn:hover {
+    background: #44403c;
+}
+#backButton {
+    padding: 8px 16px;
+    background: transparent;
+    border: 2px solid #1c1917;
+    color: #1c1917;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+#backButton:hover {
+    background: #1c1917;
+    color: #fef9f0;
+}
+.difficulty.active {
+    border-color: #f59e0b;
+    color: #92400e;
+    background: #fffbeb;
+    border-width: 3px;
+    color: #92400e;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+a button, a > button {
+    padding: 8px 16px;
+    background: transparent;
+    border: 2px solid #1c1917;
+    color: #1c1917;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+a button:hover {
+    background: #1c1917;
+    color: #fef9f0;
+}
+
+#submitButton 
+{
+    padding: 8px 16px;
+    background: transparent;
+    border: 2px solid #1c1917;
+    color: #1c1917;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+#submitButton:hover {
+    background: #1c1917;
+    color: #fef9f0;
+}
+#NewPromptButton {
+    padding: 8px 16px;
+    background: transparent;
+    border: 2px solid #1c1917;
+    color: #1c1917;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: inline-block;
+    align-self: center;
+}
+#NewPromptButton:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    border-color: #e7e5e4;
+    color: #57534e;
+}
+#NewPromptButton:disabled:hover {
+    background: transparent;
+    color: #57534e;
+}
+#NewPromptButton:hover {
+    background: #1c1917;
+    color: #fef9f0;
+}
+
+#practice-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+    margin-bottom: 1rem;
+    border: 2.3px solid #d97706;
+    display: inline-flex;
+    padding: 10px 14px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 48px;
+    height: 26px;
+    flex-shrink: 0;
+}
+.switch input { opacity: 0; width: 0; height: 0; }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background: #d6d3d1;
+    border-radius: 26px;
+    border: 1.5px solid #c4bfbb;
+    transition: 0.25s;
+}
+.slider:before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 2px;
+    top: 2px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    transition: 0.25s;
+}
+.switch input:checked + .slider {
+    background: #f59e0b;
+    border-color: #d97706;
+}
+.switch input:checked + .slider:before {
+    transform: translateX(22px);
+}
+
+#practice-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #57534e;
+}

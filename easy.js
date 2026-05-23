@@ -1,6 +1,18 @@
 let currentChallenge = null;
 let attemptsLeft = 5;
 
+document.addEventListener("DOMContentLoaded", function() {
+    const newPromptButton = document.getElementById("NewPromptButton");
+    newPromptButton.disabled = true; // Disable the button by default
+    document.getElementById("PracticeMode").onchange = function() 
+    {
+        if (this.checked) {
+            newPromptButton.disabled = false;
+        } else {
+            newPromptButton.disabled = true;
+        }
+    }
+});
 
 function createPrompt() 
 {
