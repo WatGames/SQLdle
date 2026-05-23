@@ -38,7 +38,9 @@ function dealPrompt()
         {
             shuffleDeck(getDailySeed());
         }
-        return deck[deckIndex++];
+        const card = deck[deckIndex++];
+        const rng = seededRNG(getDailySeed() + deckIndex);
+        return {...card, rng};
 }
 
 function seededRNG(seed) 

@@ -4,19 +4,19 @@ let attemptsLeft = 5;
 
 function createPrompt() 
 {
-    const { db : selectedDB, table : selectedTable, column : selectedColumn, sqlType } = dealPrompt();  
+    const { db : selectedDB, table : selectedTable, column : selectedColumn, sqlType, rng } = dealPrompt();  
     let result;
     if (sqlType === "SELECT")
     {
-        result = SelectPrompt(selectedColumn, selectedTable);
+        result = SelectPrompt(selectedColumn, selectedTable, rng);
     }
     else if (sqlType === "DELETE")
     {
-        result = DeletePrompt(selectedColumn, selectedTable);
+        result = DeletePrompt(selectedColumn, selectedTable, rng);
     }
     else if (sqlType === "UPDATE")
     {
-        result = UpdatePrompt(selectedColumn, selectedTable);
+        result = UpdatePrompt(selectedColumn, selectedTable, rng);
     }
 
     if (!result)
@@ -33,23 +33,28 @@ function createPrompt()
     };
 }
 
-function SelectPrompt(column, table)
+function SelectPrompt(column, table, rng)
 {
     let prompt, answer;
-    const harder = Math.random() < 0.5; 
+    const harder = rng() < 0.5; 
     
     if (harder) 
         {
             if (column.type === "INT")
             {
-                const randomValue = Math.floor(Math.random() * 1000); 
-                const GT = Math.random() < 0.5;
-                if(GT)
+                const randomValue = Math.floor(rng() * 1000); 
+                const condition = Math.floor(rng() * 3);
+                if(condition === 0)
+                {
+                    prompt = `Write a query that returns the ${column.name} column from the ${table.name} table where the value is equal to ${randomValue}.`;
+                answer = `SELECT ${column.name} FROM ${table.name} WHERE ${column.name} = ${randomValue};`;
+                }
+                else if(condition === 1)
                 {
                     prompt = `Write a query that returns the ${column.name} column from the ${table.name} table where the value is greater than ${randomValue}.`;
-                answer = `SELECT ${column.name} FROM ${table.name} WHERE ${column.name} > ${randomValue};`;
+                    answer = `SELECT ${column.name} FROM ${table.name} WHERE ${column.name} > ${randomValue};`;
                 }
-                else                
+                else if(condition === 2)             
                     {
                     prompt = `Write a query that returns the ${column.name} column from the ${table.name} table where the value is less than ${randomValue}.`;
                     answer = `SELECT ${column.name} FROM ${table.name} WHERE ${column.name} < ${randomValue};`;
@@ -72,7 +77,7 @@ function SelectPrompt(column, table)
 
 }
 
-function DeletePrompt(column, table)
+function DeletePrompt(column, table, rng)
 {
     return{
     prompt: `Write a query that deletes all entries from the ${table.name} table.`,
@@ -80,7 +85,7 @@ function DeletePrompt(column, table)
     };
 }
 
-function UpdatePrompt(column, table)
+function UpdatePrompt(column, table, rng)
 {
     return{
     prompt: `Write a query that updates the ${column.name} column in the ${table.name} table to 'updated' for all entries where it is not null.`,
@@ -95,9 +100,8 @@ function displayDB(selectedDB, table) {
 }
 
 function newPrompt() {
-    currentChallenge = createPrompt(); 
-    if (!currentChallenge) 
-        {
+    currentChallenge = createPrompt();
+    if (!currentChallenge) {
         document.getElementById("prompt-text").textContent = "Error loading prompt — check console.";
         return;
     }
@@ -107,6 +111,14 @@ function newPrompt() {
     document.getElementById("count").textContent = `Attempts left: ${attemptsLeft}`;
     document.getElementById("query-input").value = '';
     document.getElementById("feedback").textContent = '';
+}
+
+function onNewPromptClicked() {
+    if (!document.getElementById("PracticeMode").checked) {
+        document.getElementById("feedback").textContent = "Enable Practice Mode to get a new prompt.";
+        return;
+    }
+    newPrompt();
 }
 
 function normalizeQuery(query) 
