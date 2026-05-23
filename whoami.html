@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who am I?</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>What is this/Who am I?</h1>
+    <p>I am Ethan Watkins and this is a summer project that I did inbetween finishing my A levels and starting my degree<br>My instagram is <a href="https://www.instagram.com/wat_ethan" target="_blank">@wat_ethan</a> and the link to my GitHub is <a href="https://github.com/WatGames" target="_blank">here</a>.</p>
+    <p>This project was started on the 10th of May 2026. When I started this I had no expirance with HTML, JS and CSS.</p>
+    <p>This project is a SQL based wordle clone, where you have to guess the correct SQL query in 6 tries or less. You can select from 3 difficulties, easy, medium and hard.<br> Each difficulty has an increasing level of difficulty relating to the complexity of the request and the difficulty of the queries.</p>
+    <p>Once you have selected a difficulty, you can press the "Play" button to start the game.</p>
+    <p>To go back to the main page, click the "Back" button below.</p>
+    <button onclick="window.location.href='index.html'">Back</button>
+    <h2>Dev log 1 (10/4/2026):</h2>
+    <ul>
+        <li>Started the project on May 10th, 2026.</li>
+        <li>Created the basic HTML structure for the index page, including a header and a paragraph describing the project.</li>
+        <li>Added buttons for selecting difficulty levels (easy, medium, hard).</li>
+        <li>Created separate HTML files for each difficulty level (easy.html, medium.html, hard.html) with a header and a back button.</li>
+        <li>Linked the buttons on the index page to their respective difficulty pages.</li>
+        <li>Added a CSS and JavaScript file for future development.</li>
+    </ul>
+    </ul>
+    <h2>Dev log 2 (16/4/2026):</h2>
+    <ul>
+        <li>Implemented the basic JavaScript functionality for the website.</li>
+        <li>Changed the styling of the buttons so that you select a difficulty level than press play instead of just clicking the button.</li>
+        <li>Added a "Play" button that will start the game after a difficulty level has been selected.</li>
+        <li>Added a function to check if a difficulty level has been selected before allowing the game to start.</li>
+        <li>Added a new page for the who am I section.</li>
+        <li>Added content to the who am I page, including a brief introduction about myself and the project.</li>
+        <li>Added links to my Instagram and GitHub profiles on the who am I page.</li>
+        <li>Added a dev log section to the who am I page to document the development process.</li>
+        <li>Added a back button to the who am I page to allow users to return to the main page.</li>
+        <li>Added a new javascript file for the easy difficulty level.</li>
+        <li>Added functionality for generating new prompts and checking answers.</li>
+        <li>Added a counter for attempts left and feedback for the user.</li>
+        <li>Added a new prompt button to allow users to get a new prompt without refreshing the page.</li>
+        <li>Added a new div to display the prompt and the attempts left.</li>
+        <li>Added a textarea for users to input their SQL queries.</li>
+        <li>Added a submit button to check the user's answer against the correct query.</li>
+        <li>Added a feedback section to provide feedback to the user on their answer.</li>
+        <li>Added a new function to generate random prompts from a predefined list of challenges.</li>
+        <li>Added a new function to check the user's answer against the correct query and provide feedback accordingly.</li>
+        <li>Changed how the how the prompt system works. Now random prompts are generated.</li>
+    </ul>
+    <h2>Dev log 3 (17/4/2026):</h2>
+    <ul>
+        <li>Changed the promt system again so that promts and answers are randomly generated from a set of databses. Only works for select</li>
+        <li>Added a new javascript file to store the databases and SQL types used in the game.</li>
+        <li>Added new javascript files to keep track of used prompts for each difficulty level.</li>
+        <li>Changed the prompt system to randomly generate prompts based on the databases and SQL types stored in the new javascript file.</li>
+        <li>Added a feature to keep track of used prompts and ensure that the same prompt is not repeated until all prompts have been used.</li>
+        <li>Added a feature to clear the used prompts once all prompts have been used.</li>
+        <li>Added a feature that adds the current prompt to the used prompts list when a new prompt is generated.</li>
+    </ul>
+
+    <h2>Dev log 4 (18/4/2026):</h2>
+    <ul>
+        <li>Added a new function to generate prompts for the DELETE SQL type.</li>
+        <li>Added a new function to generate prompts for the UPDATE SQL type.</li>
+        <li>Added functionality to randomly select an SQL type (SELECT, DELETE, UPDATE) when generating a prompt.</li>
+        <li>Added functionality to generate prompts based on the selected SQL type.</li>
+        <li>Added a feature to make easy promts have a 50% chance to be harder by adding a WHERE clause to the prompt.</li>
+        <li>For now the WHERE clause only works for SELECT prompts and only has > operator. Also for varchar types the example has not been made yet so for now it says example.</li>       
+    </ul>
+
+    <h2>Dev log 5 (23/4/2026):</h2>
+    <ul>
+        <li>Added this project to my github portfolio.</li>
+    </ul>
+        
+</body>
+</html>

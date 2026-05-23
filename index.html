@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQLdle</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>SQLdle website</h1>
+    <p>Welcome to the offical website for SQLdle.</p>
+    <a href="whoami.html"><button>Who am I?</button></a>
+    
+    <p>To play the game, select a difficulty level and then press the "Play" button.</p>
+    <p>Easy is for beginners, medium is for those with some experience with SQL and hard is for those who are very experienced with SQL.</p>
+    <p>Good luck!</p>
+    <h2>Play</h2>
+    <p>5 chances to guess the correct SQL query</p>
+    <div class="difficulty-container">
+    <button id="easyLink" class="difficulty" onclick="selectDifficulty('easy')">Easy</button>
+    <button id="mediumLink" class="difficulty" onclick="selectDifficulty('medium')">Medium</button>
+    <button id="hardLink" class="difficulty" onclick="selectDifficulty('hard')">Hard</button>
+    </div> 
+    <button id="playBtn" onclick="Play()">Play</button>
+</body>
+</html>
