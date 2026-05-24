@@ -59,7 +59,7 @@ function SelectPrompt(column, table, rng)
                 if(condition === 0)
                 {
                     prompt = `Write a query that returns the ${column.name} column from the ${table.name} table where the value is equal to ${randomValue}.`;
-                answer = `SELECT ${column.name} FROM ${table.name} WHERE ${column.name} = ${randomValue};`;
+                    answer = `SELECT ${column.name} FROM ${table.name} WHERE ${column.name} = ${randomValue};`;
                 }
                 else if(condition === 1)
                 {
@@ -74,9 +74,14 @@ function SelectPrompt(column, table, rng)
             }
             else if (column.type.startsWith("VARCHAR"))
             {
-                const randomValue = `'example'`;
+                const randomValue = `example`;
                 prompt = `Write a query that returns the ${column.name} column from the ${table.name} table where the value is equal to ${randomValue}.`;
-                answer = `SELECT ${column.name} FROM ${table.name} WHERE ${column.name} = "${randomValue}";`;
+                answer = `SELECT ${column.name} FROM ${table.name} WHERE ${column.name} = '${randomValue}';`;
+            }
+            else
+            {
+                prompt = `Temp query ${column.type} type not yet implemented`
+                answer = "temp answer"
             }
         }
     else 
@@ -91,18 +96,96 @@ function SelectPrompt(column, table, rng)
 
 function DeletePrompt(column, table, rng)
 {
-    return{
-    prompt: `Write a query that deletes all entries from the ${table.name} table.`,
-    answer: `DELETE FROM ${table.name};`
-    };
+    let prompt, answer;
+    const harder = rng() < 0.5; 
+    if (harder)
+    {
+        if(column.type === "INT")
+        {
+            const randomValue = Math.floor(rng()*1000);
+            const condition = Math.floor(rng()*3);
+            if(condition === 0) 
+            {
+                prompt = `Write a query that deletes all entries from the ${table.name} table where the ${column.name} is equal to ${randomValue}`;
+                answer = `DELETE FROM ${table.name} WHERE ${column.name} = ${randomValue}`;
+            }
+            else if(condition === 1)
+            {
+                prompt = `Write a query that deletes all entries from the ${table.name} table where the ${column.name} is greater than ${randomValue}`;
+                answer = `DELETE FROM ${table.name} WHERE ${column.name} > ${randomValue}`;
+            }
+            else if(condition === 2)
+            {
+                prompt = `Write a query that deletes all entries from the ${table.name} table where the ${column.name} is less than ${randomValue}`;
+                answer = `DELETE FROM ${table.name} WHERE ${column.name} < ${randomValue}`;
+            }
+        }
+        else if (column.type.startsWith("VARCHAR"))
+        {
+            const randomValue = `example`;
+            prompt = `Write a query that deletes all entries from the ${table.name} table where the ${column.name} is equal to '${randomValue}'`;
+            answer = `DELETE FROM ${table.name} WHERE ${column.name} = '${randomValue}'`;
+        }
+        else
+        {
+            prompt = `Temp query ${column.type} type not yet implemented`
+            answer = "temp answer"
+        }
+    }
+    else
+    {
+        prompt = `Write a query that deletes all entries from the ${table.name} table`;
+        answer = `DELETE FROM ${table.name}`;
+    }
+    return { prompt, answer };
 }
-
 function UpdatePrompt(column, table, rng)
 {
-    return{
-    prompt: `Write a query that updates the ${column.name} column in the ${table.name} table to 'updated' for all entries where it is not null.`,
-    answer: `UPDATE ${table.name} SET ${column.name} = 'updated' WHERE ${column.name} IS NOT NULL;`
-    };
+    let prompt, answer;
+    const harder = rng() < 0.5; 
+    if(harder)
+    {
+        const randomValue = Math.floor(rng() * 1000);
+        const randomValueUpdate = Math.floor(rng() * 12467);
+        const condition = Math.floor(rng() * 3);
+        if (column.type === "INT")
+        {
+            if(condition === 0)
+            {
+                prompt = `Write a query that updates the ${column.name} column in the ${table.name} table to ${randomValueUpdate} where ${column.name} is greater than ${randomValue}`;
+                answer = `UPDATE ${table.name} SET ${column.name} = ${randomValueUpdate} WHERE ${column.name} > ${randomValue}`;
+            }
+            else if (condition === 1)
+            {
+                prompt = `Write a query that updates the ${column.name} column in the ${table.name} table to ${randomValueUpdate} where ${column.name} is less than ${randomValue}`;
+                answer = `UPDATE ${table.name} SET ${column.name} = ${randomValueUpdate} WHERE ${column.name} < ${randomValue}`;
+            }
+
+            else if (condition === 2)
+            {
+                prompt = `Write a query that updates the ${column.name} column in the ${table.name} table to ${randomValueUpdate} where ${column.name} is equal to ${randomValue}`;
+     answer = `UPDATE ${table.name} SET ${column.name} = '${randomValueUpdate}' WHERE ${column.name} = '${randomValue}'`;
+            }
+        }
+        else if (column.type.startsWith("VARCHAR"))
+        {
+            const randomValueUpdate = `Update`;
+            const randomValue = `ToUpdate`;
+            prompt = `Write a query that updates the ${column.name} column in the ${table.name} table to ${randomValueUpdate} where ${column.name} equal to ${randomValue}`;
+            answer = `UPDATE ${table.name} SET ${column.name} = ${randomValueUpdate} WHERE ${column.name} = ${randomValue}`;
+        }
+        else
+        {
+            prompt = `Temp query ${column.type} type not yet implemented`
+            answer = "temp answer"
+        }
+    }
+    else
+    {
+        prompt = `Write a query that updates the ${column.name} column in the ${table.name} table to 'updated' for all entries.`;
+        answer = `UPDATE ${table.name} SET ${column.name} = 'updated'`;
+    }
+    return{prompt, answer};
 }
 function displayDB(selectedDB, table) {
     const db      = selectedDB.name;

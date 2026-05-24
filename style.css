@@ -294,7 +294,25 @@ a button:hover {
     justify-content: space-between;
     margin-bottom: 1rem;
 }
+#prompt-box 
+{
+    height: 64px;
+    overflow-y: auto;
+    margin-bottom: 0.5;
+}
+/* #prompt-box p {
+    margin-bottom: 0.25rem;
+} */
 
+#count {
+    height: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+#feedback {
+    height: 1.5rem;
+    margin-top: 0.5rem;
+}
 
 body.dark-mode {
     background: #1c1917;
@@ -345,10 +363,23 @@ body.dark-mode .modal-body label {
 }
 
 body.dark-mode .modal-content button {
-    background: #44403c;
+    background: #fef9f0;
+    color: #000000;
+}
+body.dark-mode .modal-content button:hover {
+    background: #24221f;
     color: #fef9f0;
 }
 
+body.dark-mode .modal-footer, body.dark-mode .modal-header
+{
+    background: #44403c;
+    color: #fef9f0;
+}
+body.dark-mode .switch input:checked + .slider {
+    background: #44403c;
+    border-color: #252321;
+}
 body.dark-mode a button, body.dark-mode a > button {
     
     border-color: #fef9f0;
