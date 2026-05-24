@@ -8,7 +8,33 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <h1>SQLdle website</h1>
+    <div id="header">
+        <h1>SQLdle website</h1>
+        <button id="Settings">⚙</button>       
+    </div>
+
+    
+
+    <div id="settingsMenu" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Settings</h2>
+            </div>
+            <div class="modal-body">
+                <label for="darkModeToggle">Dark Mode:</label>
+                <label class="switch">
+                    <input type="checkbox" id="darkModeToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="modal-footer">
+                <button id="saveSettings">Save</button>
+            </div>
+        </div>
+    </div>
+
+  
     <p>Welcome to the offical website for SQLdle.</p>
     <a href="whoami.html"><button>Who am I?</button></a>
     

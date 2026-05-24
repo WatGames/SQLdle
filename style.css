@@ -200,3 +200,183 @@ a button:hover {
     text-transform: uppercase;
     color: #57534e;
 }
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4); 
+}
+.close {
+    color: #000000;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover, .close:focus {
+    color: #888888;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #f59e0b;
+    color: white;
+}
+
+.modal-body {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #f59e0b;
+  color: white;
+}
+.modal-content {
+    position: relative;
+    background-color: #fef9fe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2), 0 6px 20px rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+}
+.modal-content button {
+    background: #fef9f0;
+    color: #1c1917;
+    border: none;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: background 0.3s, color 0.3s;
+}
+.modal-content button:hover, .modal-content button:focus {
+    background: #1c1917;
+    color: white;
+}
+.modal-content button:active {
+     background: #1c1917;
+    color: white;
+}
+
+@keyframes animatetop {
+    from {top: -300px; opacity: 0} 
+    to {top: 0; opacity: 1}
+}
+
+#Settings {
+    background: transparent;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    line-height: 1;
+}
+#Settings:hover {
+    opacity: 0.7;
+}
+#header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+
+body.dark-mode {
+    background: #1c1917;
+    color: #fef9f0;
+}
+body.dark-mode p {
+    color: #a8a29e;
+}
+body.dark-mode .difficulty {
+    background: #292524;
+    border-color: #44403c;
+    color: #d6d3d1;
+}
+body.dark-mode .difficulty.active {
+    border-color: #f59e0b ;
+    color: #f59e0b ;
+    background: #3a3330 ;
+    border-width: 3px ;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3) ;
+}
+
+body.dark-mode .difficulty:hover, body.dark-mode .difficulty.selected {
+    background: #fef9fe;
+    border-color: #000000;
+    color: #000;
+}
+body.dark-mode #playBtn {
+    background: #fef9f0;
+    color: #1c1917;
+}
+body.dark-mode #playBtn:hover {
+    background: #534b45;
+    color: #fef9f0 ;
+    
+}
+
+body.dark-mode .modal-content {
+    background-color: #292524;
+    border-color: #44403c;
+}
+
+body.dark-mode .modal-body {
+    color: #fef9f0;
+}
+
+body.dark-mode .modal-body label {
+    color: #d6d3d1;
+}
+
+body.dark-mode .modal-content button {
+    background: #44403c;
+    color: #fef9f0;
+}
+
+body.dark-mode a button, body.dark-mode a > button {
+    
+    border-color: #fef9f0;
+    color: #fef9f0;
+}
+body.dark-mode a button:hover {
+    background: #fef9f0;
+    color: #1c1917;
+}
+
+body.dark-mode #Settings
+{
+    color: #fef9f0;
+}
+
+body.dark-mode #backButton, body.dark-mode #submitButton,  body.dark-mode #NewPromptButton  {
+    border-color: #fef9f0;
+    color: #fef9f0;
+}
+
+body.dark-mode #backButton:hover,  body.dark-mode #submitButton:hover, body.dark-mode #NewPromptButton:hover  {
+    background: #fef9f0;
+    color: #1c1917;
+}
+
+
+body.dark-mode #query-input
+{
+    background: #1c1917;
+    color: #fef9f0;
+}
